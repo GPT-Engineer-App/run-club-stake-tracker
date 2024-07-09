@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 const Dashboard = () => {
   // Mock data for the dashboard
@@ -48,13 +47,17 @@ const Dashboard = () => {
           <CardTitle>Activity (Last 7 Days)</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={activityData}>
-              <XAxis dataKey="day" />
-              <YAxis />
-              <Bar dataKey="distance" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="flex items-end justify-between h-64">
+            {activityData.map((data, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div 
+                  className="bg-purple-600 w-8" 
+                  style={{height: `${data.distance * 10}%`}}
+                ></div>
+                <span className="mt-2 text-sm">{data.day}</span>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
     </div>
